@@ -1,0 +1,1 @@
+# autoTestIntl_android
