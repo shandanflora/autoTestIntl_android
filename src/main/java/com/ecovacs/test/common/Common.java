@@ -23,7 +23,15 @@ public class Common {
     //parameter
     private static Logger logger = LoggerFactory.getLogger(Common.class);
     private static Common common = null;
+    private FailType failType = null;
+
+
     //
+    public enum FailType{
+        NOT_REGISTER, //user not register
+        ALREADY_REGISTER //user had registered
+    }
+
     private Common(){
 
     }
@@ -38,28 +46,17 @@ public class Common {
     public AndroidDriver getDriver(){
         AndroidDriver driver = null;
         // set up appium
-        /*File classpathRoot = new File(System.getProperty("user.dir"));
-        System.out.println(System.getProperty("user.dir"));
-        File appDir = new File(classpathRoot, "/src/app/");
-        File app = new File(appDir, "NetDeeAnbot.app");*/
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        //capabilities.setCapability(MobileCapabilityType.VERSION, "9.2");
         capabilities.setCapability(MobileCapabilityType.ACCEPT_SSL_CERTS,true);
         capabilities.setCapability(MobileCapabilityType.PLATFORM, "Android");
-        //capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Browser");
         capabilities.setCapability("deviceName","AndroidTestDevice");
         //capabilities.setCapability("deviceName","vivo_X6S_A");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("appPackage","com.ecovacs.ecosphere.intl");
         capabilities.setCapability("appActivity","com.ecovacs.ecosphere.ui.WelcomeActivity");
         capabilities.setCapability("newCommandTimeout", 0);
-        /*capabilities.setCapability("app", app.getAbsolutePath());
-        System.out.println(app.getAbsolutePath());*/
-        //capabilities.setCapability(MobileCapabilityType.APP,"com.iqiyi.reliao");
-        //driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
         try {
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-            //driver.startActivity("com.ecovacs.ecosphere.intl", "com.ecovacs.ecosphere.ui.WelcomeActivity");
         }catch (MalformedURLException e){
             e.printStackTrace();
             logger.info("exception: " + e.toString());
@@ -67,7 +64,7 @@ public class Common {
         return driver;
     }
 
-    public boolean delAllFile(String path) {
+    boolean delAllFile(String path) {
         File file = new File(path);
         File temp;
             String[] tempList = file.list();
@@ -142,7 +139,7 @@ public class Common {
 
     public String executeCommand(String command) {
 
-        StringBuffer output = new StringBuffer();
+        StringBuilder output = new StringBuilder();
         Process process;
         try {
             //ProcessBuilder pb = new ProcessBuilder(command);
@@ -154,7 +151,8 @@ public class Common {
 
             String line;
             while ((line = reader.readLine())!= null) {
-                output.append(line + "\n");
+                output.append(line);
+                output.append("\n");
                 System.out.println(output.toString());
             }
 
@@ -185,6 +183,14 @@ public class Common {
             iLoop++;
         }
         return bResult;
+    }
+
+    public FailType getFailType(){
+        return failType;
+    }
+
+    public void setFailType(FailType type){
+        failType = type;
     }
 
 }

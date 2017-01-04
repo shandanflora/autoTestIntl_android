@@ -6,7 +6,6 @@ import io.appium.java_client.android.AndroidDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by ecosqa on 16/11/30.
@@ -97,7 +96,9 @@ class HandleIntl {
             return false;
         }
         if(!RetrievePassActivity.getInstance().ShowResisterConfirmActivity()){
+            Common.getInstance().setFailType(Common.FailType.ALREADY_REGISTER);
             Common.getInstance().goBack(androidDriver, 1);
+            logger.error("Not show Retrieve confirm activity!!!");
             return false;
         }
         logger.info("Show active email activity!!!");
@@ -120,6 +121,7 @@ class HandleIntl {
     private boolean enterLoginAcivity(){
         WelcomeActivity.getInstance().clickLogin();
         if (!LoginActivity.getInstance().showLoginActivity()) {
+            logger.info("Not show login activity!!!");
             return false;
         }
         logger.info("Show login activity!!!");
@@ -134,11 +136,13 @@ class HandleIntl {
         logger.info("Click forget password!!!");
         if (!ForgetPassActivity.getInstance().showActivity()) {
             Common.getInstance().goBack(androidDriver, 1);
-            logger.error("Show forget password activity!!!");
+            logger.error("Not show forget password activity!!!");
             return false;
         }
         if (!ForgetPassActivity.getInstance().sendEmail(strCountry, strEmail)) {
             Common.getInstance().goBack(androidDriver, 2);
+            Common.getInstance().setFailType(Common.FailType.NOT_REGISTER);
+            logger.error("Not show retrieve password activity!!!");
             return false;
         }
         logger.info("Click send verify email!!!");
