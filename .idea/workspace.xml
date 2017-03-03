@@ -1,61 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61ea5fde-52ef-42b6-8594-0dcbb34aed87" name="Default" comment="commit for update code">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/Translate.xlsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_inject_guice_4_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_uncommons_reportng_1_1_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__velocity_velocity_1_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__velocity_velocity_dep_1_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/AboutActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/AreaCleanActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/ChangePassActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/ContinueCleanActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/FirmVerActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/FullScreenActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/LanguageActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/NewScheduleActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/RepetitionActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/ResetMapActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/SettingActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/SpotCleanActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/TimeScheduleActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/UnibotCleanActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/UserAgreeActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/VirtualWallActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/VoiceReportActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/WorkLogActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/TranslateErrorReport.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/TranslateIntl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/ecovacs/test/TestIntlTranslate_English.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/ecovacs/test/TestIntlTranslate_French.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/ecovacs/test/TestIntlTranslate_Italian.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/ecovacs/test/TestIntlTranslate_Korean.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/ecovacs/test/TestIntlTranslate_Portuguese.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testng.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/com_ecovacs_test_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/com_ecovacs_test_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/com.ecovacs.test.iml" afterPath="$PROJECT_DIR$/com.ecovacs.test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/HandleIntl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/HandleIntl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/Main.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/ForgetPassActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/ForgetPassActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/LoginActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/MoreActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/MoreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/RegisterActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/RegisterActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/WelcomeActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/activity/WelcomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/Common.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/Common.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/ExcelManage.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/ExcelManage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/ExcelRow.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/ExcelRow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/JsonParse.java" afterPath="$PROJECT_DIR$/src/main/java/com/ecovacs/test/common/JsonParse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/commonData.properties" afterPath="$PROJECT_DIR$/src/main/resources/commonData.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/country.json" afterPath="$PROJECT_DIR$/src/main/resources/country.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/ecovacs/test/TestIntl.java" afterPath="$PROJECT_DIR$/src/test/java/com/ecovacs/test/TestIntl.java" />
-    </list>
+    <list default="true" id="61ea5fde-52ef-42b6-8594-0dcbb34aed87" name="Default" comment="commit for update code" />
     <list id="9f860643-5214-4a8a-85fb-44e1caeab421" name="Rejected commit: Default" comment="commit for update code" />
     <ignored path="com.ecovacs.test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1390,7 +1336,7 @@
       <workItem from="1488243686596" duration="22434000" />
       <workItem from="1488331242522" duration="2478000" />
       <workItem from="1488335668504" duration="2062000" />
-      <workItem from="1488414786575" duration="3938000" />
+      <workItem from="1488414786575" duration="4059000" />
     </task>
     <task id="LOCAL-00001" summary="commit for adding a new column fail type">
       <created>1483497705546</created>
@@ -1442,7 +1388,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="359748000" />
+    <option name="totallyTimeSpent" value="359869000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1455,7 +1401,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="176" y="33" width="1440" height="806" extended-state="1" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827586" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
