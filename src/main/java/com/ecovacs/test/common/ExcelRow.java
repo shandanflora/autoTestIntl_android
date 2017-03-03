@@ -2,6 +2,7 @@ package com.ecovacs.test.common;
 
 /**
  * Created by ecosqa on 16/12/19.
+ *
  */
 public class ExcelRow {
     /*

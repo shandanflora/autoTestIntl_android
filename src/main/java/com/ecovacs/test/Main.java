@@ -15,7 +15,10 @@ public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String args[]){
-        List<String> list = JsonParse.getJsonParse().readDataFromJson("country.json", "countries");
+        TranslateIntl.getInstance().repeatRow();
+
+    }
+        /*List<String> list = JsonParse.getJsonParse().readDataFromJson("country.json", "countries");
         HandleIntl.getInstance().initAppium();
         if (!HandleIntl.getInstance().enterWelcomeActivity()){
             return;
@@ -58,6 +61,7 @@ public class Main {
             logger.info("***********Forget password country -" + strCountry + " successfully!!!***********");
             iLoop++;
         }
-        ExcelManage.getInstance().writeColServer();
+        ExcelManage.getInstance().writeColServer();*/
     }
-}
+
+

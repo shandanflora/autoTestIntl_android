@@ -1,11 +1,13 @@
 package com.ecovacs.test;
 
 import com.ecovacs.test.activity.*;
-import com.ecovacs.test.common.Common;
+import com.ecovacs.test.common.*;
 import io.appium.java_client.android.AndroidDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ecosqa on 16/11/30.
@@ -15,6 +17,7 @@ class HandleIntl {
     private static Logger logger = LoggerFactory.getLogger(HandleIntl.class);
     private static HandleIntl handleIntl = null;
     private AndroidDriver androidDriver = null;
+    private Map<String, String> languageMap = null;
 
     private HandleIntl(){
 
@@ -37,14 +40,32 @@ class HandleIntl {
 
     public void init(AndroidDriver driver){
         androidDriver = driver;
+        AboutActivity.getInstance().init(androidDriver);
+        AreaCleanActivity.getInstance().init(androidDriver);
+        ChangePassActivity.getInstance().init(androidDriver);
+        ContinueCleanActivity.getInstance().init(androidDriver);
         CountrySelectActivity.getInstance().init(androidDriver);
-        RegisterActivity.getInstance().init(androidDriver);
-        WelcomeActivity.getInstance().init(androidDriver);
-        LoginActivity.getInstance().init(androidDriver);
+        FirmVerActivity.getInstance().init(androidDriver);
         ForgetPassActivity.getInstance().init(androidDriver);
+        FullScreenActivity.getInstance().init(androidDriver);
+        LanguageActivity.getInstance().init(androidDriver);
+        LoginActivity.getInstance().init(androidDriver);
         MainActivity.getInstance().init(androidDriver);
         MoreActivity.getInstance().init(androidDriver);
+        NewScheduleActivity.getInstance().init(androidDriver);
+        RegisterActivity.getInstance().init(androidDriver);
+        RepetitionActivity.getInstance().init(androidDriver);
+        ResetMapActivity.getInstance().init(androidDriver);
         RetrievePassActivity.getInstance().init(androidDriver);
+        SettingActivity.getInstance().init(androidDriver);
+        SpotCleanActivity.getInstance().init(androidDriver);
+        TimeScheduleActivity.getInstance().init(androidDriver);
+        UnibotCleanActivity.getInstance().init(androidDriver);
+        UserAgreeActivity.getInstance().init(androidDriver);
+        VirtualWallActivity.getInstance().init(androidDriver);
+        VoiceReportActivity.getInstance().init(androidDriver);
+        WelcomeActivity.getInstance().init(androidDriver);
+        WorkLogActivity.getInstance().init(androidDriver);
     }
 
     boolean enterWelcomeActivity(){
@@ -189,7 +210,7 @@ class HandleIntl {
         return true;
     }
 
-    /*private boolean login(String strCountry, String strEmail, String strPass){
+    private boolean login(String strCountry, String strEmail, String strPass){
         if(!WelcomeActivity.getInstance().showWelcomeActivity()){
             logger.error("Can not show welcome activity!!!");
             return false;
@@ -197,7 +218,7 @@ class HandleIntl {
         WelcomeActivity.getInstance().clickLogin();
         logger.info("Click login in welcome activity!!!");
         return loginWithoutWelcome(strCountry, strEmail, strPass);
-    }*/
+    }
 
     private boolean logout(){
         MainActivity.getInstance().clickMore();
@@ -221,4 +242,283 @@ class HandleIntl {
         }
         return true;
     }*/
+
+    public void changeLanguage(String strLanguage){
+        //return deebot clean
+        Common.getInstance().goBack(androidDriver, 1);
+        //return main
+        Common.getInstance().goBack(androidDriver, 1);
+        /*if(!login("Japan", PropertyData.getProperty("hotmail_email"), PropertyData.getProperty("login_pass"))){
+            logger.error("login failed!!!");
+            return;
+        }*/
+        MainActivity.getInstance().showActivity();
+        MainActivity.getInstance().clickMore();
+        MoreActivity.getInstance().clickLanguage();
+        LanguageActivity.getInstance().selectLanguage(strLanguage);
+        //return main
+        Common.getInstance().goBack(androidDriver, 1);
+        if(!logout()){
+            logger.info("logout failed!!!");
+        }
+    }
+
+    void translateErrorReport_init(){
+        List<String> list = JsonParse.getJsonParse().readDataFromJson("country.json", "sheets");
+        TranslateErrorReport.getInstance().init(list);
+    }
+
+    void translate_init(String strColName){
+        Map<String, String> tranMap = TranslateIntl.getInstance().readExcel("Translate.xlsx", strColName);
+        if(tranMap.isEmpty()){
+            logger.error("The language map is empty!!!");
+            return;
+        }
+        languageMap = tranMap;
+    }
+
+    boolean translateWelcome(){
+        //changeLanguage("English");
+        return WelcomeActivity.getInstance().translate(languageMap);
+    }
+
+    boolean translateLogin(){
+        WelcomeActivity.getInstance().clickLogin();
+        LoginActivity.getInstance().showLoginActivity();
+        return LoginActivity.getInstance().translate(languageMap);
+    }
+
+    boolean translateRegister(){
+        WelcomeActivity.getInstance().clickRegister();
+        RegisterActivity.getInstance().showRegisterActivity();
+        return RegisterActivity.getInstance().translate(languageMap);
+    }
+
+    boolean translateForget(){
+        //*****del********
+        //WelcomeActivity.getInstance().clickLogin();
+        //LoginActivity.getInstance().showLoginActivity();
+        //**************
+        LoginActivity.getInstance().clickForgetPass();
+        ForgetPassActivity.getInstance().showActivity();
+        return ForgetPassActivity.getInstance().translate(languageMap);
+    }
+
+    boolean translateMain(){
+        login("Japan", PropertyData.getProperty("hotmail_email"), PropertyData.getProperty("login_pass"));
+        //
+        MainActivity.getInstance().showActivity();
+        //
+        return MainActivity.getInstance().translate(languageMap);
+    }
+
+    boolean translateMore(){
+        MainActivity.getInstance().clickMore();
+        boolean bTranlate = MoreActivity.getInstance().translate(languageMap);
+        return bTranlate;
+    }
+
+    boolean translateChangePass(){
+        //MainActivity.getInstance().clickMore();
+        MoreActivity.getInstance().clickChangePass();
+        ChangePassActivity.getInstance().showActivity();
+        boolean bTrans =  ChangePassActivity.getInstance().translate(languageMap);
+        Common.getInstance().goBack(androidDriver, 2);
+        return bTrans;
+    }
+
+    boolean translateAbout(){
+        //MainActivity.getInstance().clickMore();
+        MoreActivity.getInstance().clickAbout();
+        boolean bTrans =  AboutActivity.getInstance().staticUITranslate(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bTrans;
+    }
+
+    boolean translateUserAgree(){
+        //MainActivity.getInstance().clickMore();
+        MoreActivity.getInstance().clickAbout();
+        AboutActivity.getInstance().clickUserAgree();
+        boolean bTrans =  UserAgreeActivity.getInstance().staticUITranslate(languageMap);
+        //back to more
+        Common.getInstance().goBack(androidDriver, 2);
+        return bTrans;
+    }
+
+    boolean translateLanguage(){
+        //MainActivity.getInstance().clickMore();
+        MoreActivity.getInstance().clickLanguage();
+        boolean bLang = LanguageActivity.getInstance().staticUITranslation(languageMap);
+        LanguageActivity.getInstance().clickBack();
+        return bLang;
+
+    }
+
+    boolean translateUnibotClean(){
+        Common.getInstance().waitForSecond(1500);
+        MainActivity.getInstance().clickDR95();
+        UnibotCleanActivity.getInstance().showHaveMapActivity();
+        //UnibotCleanActivity.getInstance().showText("-");
+        return UnibotCleanActivity.getInstance().translate(languageMap);
+    }
+
+    boolean translateUnibotSetting(){
+        //will delete
+        //MainActivity.getInstance().clickDR95();
+        //
+        UnibotCleanActivity.getInstance().clickSetting();
+        return SettingActivity.getInstance().staticUiTranslate(languageMap);
+    }
+
+    boolean translateWorkLog(){
+        //after check return to setting
+        SettingActivity.getInstance().clickWorkLog();
+        boolean bResult = WorkLogActivity.getInstance().translate(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bResult;
+    }
+
+    boolean translateContiuneClean(){
+        //after check return to setting
+        SettingActivity.getInstance().clickContinuedClean();
+        boolean bResult = ContinueCleanActivity.getInstance().translate(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bResult;
+
+    }
+
+    boolean translateVoiceReport(){
+        //after check return to setting
+        SettingActivity.getInstance().clickLanguage();
+        boolean bResult = VoiceReportActivity.getInstance().staticUITranslation(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bResult;
+    }
+
+    boolean translateFirmVer(){
+        SettingActivity.getInstance().clickFirmware();
+        boolean bResult = FirmVerActivity.getInstance().staticUITranslation(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bResult;
+    }
+
+    boolean translateResetMap(){
+        SettingActivity.getInstance().clickReset();
+        boolean bResult = ResetMapActivity.getInstance().translate(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bResult;
+    }
+
+    boolean translateNewTimeTranslation(){
+        SettingActivity.getInstance().clickTimeSchedule();
+        TimeScheduleActivity.getInstance().showActivity();
+        TimeScheduleActivity.getInstance().clickAddSchedule();
+        boolean bResult = NewScheduleActivity.getInstance().translate(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bResult;
+    }
+
+    boolean translateAddTimeSchedule(){
+        TimeScheduleActivity.getInstance().clickAddSchedule();
+        NewScheduleActivity.getInstance().addTime();
+        return TimeScheduleActivity.getInstance().addTime(languageMap);
+    }
+
+    boolean translateDelSchedule_edit(){
+        TimeScheduleActivity.getInstance().enterEditSchedule();
+        boolean bRes = NewScheduleActivity.getInstance().delSchedule(languageMap);
+        NewScheduleActivity.getInstance().clickCancel();
+        return bRes;
+    }
+
+    boolean translateDelSchedule_swipe(){
+        boolean bRes = TimeScheduleActivity.getInstance().translateDel_Swipe(languageMap);
+        //return settings
+        Common.getInstance().goBack(androidDriver, 1);
+        return bRes;
+    }
+
+
+    boolean translateRepetition(){
+        TimeScheduleActivity.getInstance().clickAddSchedule();
+        NewScheduleActivity.getInstance().clickRepeat();
+        boolean bRes = RepetitionActivity.getInstance().staticUITranslation(languageMap);
+        RepetitionActivity.getInstance().clickBack();
+        NewScheduleActivity.getInstance().clickCancel();
+        return bRes;
+    }
+
+    boolean translateSelectWeekOfDate(){
+        TimeScheduleActivity.getInstance().clickAddSchedule();
+        boolean bResult = NewScheduleActivity.getInstance().translateSelectWeekOfDate(languageMap);
+        NewScheduleActivity.getInstance().clickCancel();
+        return bResult;
+    }
+
+    boolean translateSelectWeekend(){
+        TimeScheduleActivity.getInstance().clickAddSchedule();
+        NewScheduleActivity.getInstance().clickRepeat();
+        boolean bResult = NewScheduleActivity.getInstance().translateWeekend(languageMap);
+        NewScheduleActivity.getInstance().clickCancel();
+        return bResult;
+    }
+
+    boolean translateSelectWorkday(){
+        TimeScheduleActivity.getInstance().clickAddSchedule();
+        NewScheduleActivity.getInstance().clickRepeat();
+        boolean bResult = NewScheduleActivity.getInstance().translateWorkday(languageMap);
+        NewScheduleActivity.getInstance().clickCancel();
+        return bResult;
+    }
+
+    boolean translateSelectEveryday(){
+        TimeScheduleActivity.getInstance().clickAddSchedule();
+        NewScheduleActivity.getInstance().clickRepeat();
+        boolean bResult = NewScheduleActivity.getInstance().translateEveryday(languageMap);
+        NewScheduleActivity.getInstance().clickCancel();
+        return bResult;
+    }
+
+    boolean translateTimeSchedule(){
+        SettingActivity.getInstance().clickTimeSchedule();
+        TimeScheduleActivity.getInstance().showActivity();
+        boolean bResult = TimeScheduleActivity.getInstance().translate(languageMap);
+        Common.getInstance().goBack(androidDriver, 1);
+        return bResult;
+    }
+
+    boolean translateFullScreen(){
+        UnibotCleanActivity.getInstance().clickFullScreen();
+        boolean bRes = FullScreenActivity.getInstance().staticUITranslation(languageMap);
+        //Common.getInstance().goBack(androidDriver, 1);
+        return bRes;
+    }
+
+    boolean translateSpot(){
+        FullScreenActivity.getInstance().clickSpot();
+        boolean bRes = SpotCleanActivity.getInstance().translate(languageMap);
+        SpotCleanActivity.getInstance().clickCancel();
+        return bRes;
+    }
+
+    boolean translateArea(){
+        FullScreenActivity.getInstance().clickArea();
+        boolean bRes = AreaCleanActivity.getInstance().translate(languageMap);
+        AreaCleanActivity.getInstance().clickCancel();
+        return bRes;
+    }
+
+    boolean translateVirtual(){
+        FullScreenActivity.getInstance().clickVirtual();
+        boolean bRes = VirtualWallActivity.getInstance().staticUITranslation(languageMap);
+        VirtualWallActivity.getInstance().clickCancel();
+        //return unibot clean
+        FullScreenActivity.getInstance().clickBack();
+        return bRes;
+    }
+
+
+
+
+
 }

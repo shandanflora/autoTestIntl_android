@@ -2,6 +2,13 @@
   "countries":[
     "Japan",
     "Jordan"
+  ],
+  "sheets":[
+    "English",
+    "French",
+    "Italian",
+    "Portuguese",
+    "Korean"
   ]
 }
 
