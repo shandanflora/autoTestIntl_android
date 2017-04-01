@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by ecosqa on 16/11/30.
  * handle international app
  */
-class HandleIntl {
+public class HandleIntl {
     private static Logger logger = LoggerFactory.getLogger(HandleIntl.class);
     private static HandleIntl handleIntl = null;
     private AndroidDriver androidDriver = null;
@@ -30,7 +30,7 @@ class HandleIntl {
         return handleIntl;
     }
 
-    void initAppium(){
+    public void initAppium(){
         AndroidDriver driver = Common.getInstance().getDriver();
         if(driver == null){
             return;

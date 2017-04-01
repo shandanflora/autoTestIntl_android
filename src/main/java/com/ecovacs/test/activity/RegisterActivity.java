@@ -53,6 +53,8 @@ public class RegisterActivity {
     private AndroidElement textViewAccept = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_xieYi")
     private AndroidElement textViewUserAgree = null;
+    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
+    private AndroidElement textViewMessage = null;
 
     private RegisterActivity(){
 
@@ -97,7 +99,17 @@ public class RegisterActivity {
         Common.getInstance().screenShot("UserAgree_" + strCountry + ".png", androidDriver);
         Common.getInstance().goBack(androidDriver, 1);
         logger.info("Finished to screen shot user agreement!!!");
+        //click register
         btnRegister.click();
+        //wait 2 second;
+        Common.getInstance().waitForSecond(2000);
+        try {
+            if(textViewMessage.isDisplayed()){
+                return false;
+            }
+        }catch (Exception e){
+            return true;
+        }
         return true;
     }
 
@@ -198,9 +210,6 @@ public class RegisterActivity {
                 bline3Email && beditEmail && bline5Password && beditPassword &&
                 beditRePassword && bbtnRegister && btextViewAccept && btextViewUserAgree;
     }
-
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
-    private AndroidElement textViewMessage = null;
 
     private boolean emptyEmail(Map<String, String> tranMap){
         btnRegister.click();

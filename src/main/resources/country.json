@@ -1,14 +1,12 @@
 {
   "countries":[
-    "Japan",
-    "Jordan"
+    "Japan"
   ],
   "sheets":[
     "English",
-    "French",
-    "Italian",
-    "Portuguese",
-    "Korean"
+    "Japanese",
+    "es-LA",
+    "fr-CA"
   ]
 }
 
