@@ -11,9 +11,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 
 /**
  * Created by ecosqa on 16/11/24.
@@ -60,7 +60,7 @@ public class JsonParse {
             return null;
         }
         //Log.i("AutoTest", "(readDataFromJson)str:" + str);
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList();
         try {
             JSONObject jsonObj = new JSONObject(str);
             JSONArray jsonArray = jsonObj.getJSONArray(strKey);
@@ -71,9 +71,9 @@ public class JsonParse {
             for (int i = 0; i < jsonArray.length(); i++){
                 list.add(jsonArray.get(i).toString());
             }
-            for(String strCountry: list){
+            /*for(String strCountry: list){
                 logger.info("(readDataFromJson)list:" + strCountry);
-            }
+            }*/
         } catch (JSONException e) {
             logger.error("(readDataFromJson)Could not find the value matched key!!!");
             e.printStackTrace();
