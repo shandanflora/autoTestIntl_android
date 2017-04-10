@@ -25,13 +25,15 @@ public class Common {
     //parameter
     private static Logger logger = LoggerFactory.getLogger(Common.class);
     private static Common common = null;
-    private FailType failType = null;
+    private REGISTER_RETURN_TYPE returnType = null;
 
 
     //
-    public enum FailType{
+    public enum REGISTER_RETURN_TYPE{
         NOT_REGISTER, //user not register
-        ALREADY_REGISTER //user had registered
+        ALREADY_REGISTER, //user had registered
+        SENDED_EMAIL, //had sent active email
+        REGISTER_FAILED //can not active email
     }
 
     private Common(){
@@ -65,8 +67,8 @@ public class Common {
         }
         return driver;
     }
-
-    boolean delAllFile(String path) {
+/*
+    public boolean delAllFile(String path) {
         File file = new File(path);
         File temp;
             String[] tempList = file.list();
@@ -86,20 +88,17 @@ public class Common {
                 }
             }
         return true;
-    }
+    }*/
 
     public boolean screenShot(String strFileName, WebDriver driver){
         TakesScreenshot screen = (TakesScreenshot ) new Augmenter().augment(driver);
-        String strPath = getClass().getResource("/").getPath()
-                        + "../" + "screenShots/";
+        String strPath = getCurPath("/report/screenShots/");
         //check
         File folder = new File(strPath);
         if(!folder.exists() && !folder.isDirectory()){
             if(!folder.mkdir()){
                 return false;
             }
-        }else {
-            delAllFile(strPath);
         }
         File ss = new File(strPath + strFileName);
         return screen.getScreenshotAs(OutputType.FILE).renameTo(ss);
@@ -121,7 +120,7 @@ public class Common {
 
     }
 
-    /*private boolean deleteDir(File dir) {
+    public boolean deleteDir(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
             if(children == null){
@@ -137,7 +136,7 @@ public class Common {
         }
         //delete empty folder or file
         return dir.delete();
-    }*/
+    }
 
     public String executeCommand(String command) {
 
@@ -187,12 +186,12 @@ public class Common {
         return bResult;
     }
 
-    public FailType getFailType(){
-        return failType;
+    public  REGISTER_RETURN_TYPE getType(){
+        return returnType;
     }
 
-    public void setFailType(FailType type){
-        failType = type;
+    public void setType(REGISTER_RETURN_TYPE type){
+        returnType = type;
     }
 
     /**
@@ -206,6 +205,27 @@ public class Common {
             iIndex = 0;
         }
         return iIndex;
+    }
+
+    /**
+     * @param strSubPath sub directory
+     * @return if strSubPath is null,return current path
+     *         else return current path and sub directory
+     */
+    public String getCurPath(String strSubPath){
+        File directory = new File("");//set current path
+        String strPath = "";
+        try{
+            logger.info(directory.getCanonicalPath());//get path
+            if(0 == strSubPath.length()){
+                strPath = directory.getCanonicalPath();
+            }else {
+                strPath = directory.getCanonicalPath() + strSubPath;
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return strPath;
     }
 
 

@@ -1,7 +1,5 @@
 package com.ecovacs.test.common;
 
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -60,7 +58,7 @@ public class TranslateErrorReport {
 
     public void insetNewLine(String strSheetName, String strActivity, String strApp, String strTrans, String strResult){
         try {
-            InputStream stream = new FileInputStream(ExcelManage.getInstance().getCurPath(("/report/") + "TranslateErrorReport.xlsx"));
+            InputStream stream = new FileInputStream(Common.getInstance().getCurPath(("/report/") + "TranslateErrorReport.xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(stream);
 
             XSSFCellStyle style = workbook.createCellStyle();
