@@ -96,15 +96,21 @@ public class RegisterActivity {
         Common.getInstance().goBack(androidDriver, 1);
         //screen shot user agreement
         clickAgreement();
+        if(strCountry.contains(" ")){
+            logger.info(strCountry);
+            strCountry = strCountry.replaceAll(" ", "_");
+            logger.info(strCountry);
+        }
         Common.getInstance().screenShot("UserAgree_" + strCountry + ".png", androidDriver);
         Common.getInstance().goBack(androidDriver, 1);
         logger.info("Finished to screen shot user agreement!!!");
         //click register
         btnRegister.click();
-        //wait 2 second;
-        Common.getInstance().waitForSecond(2000);
+        //wait for end note;
+        Common.getInstance().showActivity(btnRegister);
         try {
             if(textViewMessage.isDisplayed()){
+                logger.error("error message--" + textViewMessage.getText());
                 return false;
             }
         }catch (Exception e){
@@ -115,7 +121,8 @@ public class RegisterActivity {
 
     private void clickAgreement(){
         textViewUserAgree.click();
-        Common.getInstance().waitForSecond(2500);
+        UserAgreeActivity.getInstance().showActivity();
+        Common.getInstance().waitForSecond(2000);
     }
 
     private boolean staticUITranslation(Map<String, String> tranMap){
