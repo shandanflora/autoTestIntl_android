@@ -30,7 +30,7 @@ public class HandleIntl {
         return handleIntl;
     }
 
-    public void initAppium(){
+    void initAppium(){
         AndroidDriver driver = Common.getInstance().getDriver();
         if(driver == null){
             return;
@@ -114,25 +114,29 @@ public class HandleIntl {
         }
         if (!RegisterActivity.getInstance().fill_Screenshot_Click(strCountry, strEmail, strPass)) {
             logger.error("Register failed!!! country--" + strCountry);
+            Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.ALREADY_REGISTER);
+            Common.getInstance().goBack(androidDriver, 1);
             return false;
         }
         if(!RetrievePassActivity.getInstance().ShowResisterConfirmActivity()){
-            Common.getInstance().setFailType(Common.FailType.ALREADY_REGISTER);
+            Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.ALREADY_REGISTER);
             Common.getInstance().goBack(androidDriver, 1);
             logger.error("Not show Retrieve confirm activity!!!");
             return false;
         }
         logger.info("Show active email activity!!!");
+        Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.SENDED_EMAIL);
         //verify email
         verifyEmail("VerifyEmail.one-jar.jar", strCountry, strEmailType, "Register");
         //check--login with new password
         RetrievePassActivity.getInstance().clickLogin();
         if (!loginWithoutWelcome(strCountry, strEmail, strPass)) {
-            logger.info("Login failed after forget password country- " + strCountry);
+            logger.info("Login failed country- " + strCountry);
+            Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.REGISTER_FAILED);
             return false;
         }
         if (!logout()) {
-            logger.info("Logout failed after forget password country- " + strCountry);
+            logger.info("Logout failed country- " + strCountry);
             Common.getInstance().goBack(androidDriver, 1);
             return false;
         }
@@ -162,7 +166,7 @@ public class HandleIntl {
         }
         if (!ForgetPassActivity.getInstance().sendEmail(strCountry, strEmail)) {
             Common.getInstance().goBack(androidDriver, 2);
-            Common.getInstance().setFailType(Common.FailType.NOT_REGISTER);
+            Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.NOT_REGISTER);
             logger.error("Not show retrieve password activity!!!");
             return false;
         }
@@ -243,7 +247,7 @@ public class HandleIntl {
         return true;
     }*/
 
-    public void changeLanguage(String strLanguage){
+    void changeLanguage(String strLanguage){
         //return deebot clean
         Common.getInstance().goBack(androidDriver, 1);
         //return main
@@ -314,8 +318,7 @@ public class HandleIntl {
 
     boolean translateMore(){
         MainActivity.getInstance().clickMore();
-        boolean bTranlate = MoreActivity.getInstance().translate(languageMap);
-        return bTranlate;
+        return MoreActivity.getInstance().translate(languageMap);
     }
 
     boolean translateChangePass(){
@@ -489,9 +492,8 @@ public class HandleIntl {
 
     boolean translateFullScreen(){
         UnibotCleanActivity.getInstance().clickFullScreen();
-        boolean bRes = FullScreenActivity.getInstance().staticUITranslation(languageMap);
+        return FullScreenActivity.getInstance().staticUITranslation(languageMap);
         //Common.getInstance().goBack(androidDriver, 1);
-        return bRes;
     }
 
     boolean translateSpot(){
