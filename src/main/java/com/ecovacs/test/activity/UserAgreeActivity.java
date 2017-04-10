@@ -25,6 +25,8 @@ public class UserAgreeActivity {
 
     @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
     private AndroidElement title = null;
+    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.webkit.WebView[1]/android.webkit.WebView[1]/android.view.View[1]/android.view.View[1]")
+    private AndroidElement webView = null;
 
     public static UserAgreeActivity getInstance(){
         if (userAgreeActivity == null){
@@ -36,6 +38,10 @@ public class UserAgreeActivity {
     public void init(AndroidDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         //this.androidDriver = driver;
+    }
+
+    public void showActivity(){
+        Common.getInstance().showActivity(webView);
     }
 
     public boolean staticUITranslate(Map<String, String> tranMap){
