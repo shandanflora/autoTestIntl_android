@@ -3,11 +3,11 @@ package com.ecovacs.test.activity;
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.PropertyData;
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,40 +21,49 @@ import java.util.Map;
 public class RegisterActivity {
     private static RegisterActivity registerActivity = new RegisterActivity();
     private static Logger logger = LoggerFactory.getLogger(RegisterActivity.class);
-    private AndroidDriver androidDriver = null;
+    private AppiumDriver driver = null;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
-    private AndroidElement titleBarTitle = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_youBian")
-    private AndroidElement titleBarRight = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
-    private AndroidElement line1Country_Region = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[3]/android.widget.TextView[1]")
-    private AndroidElement line2Country_Region = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[4]/android.widget.TextView[1]")
-    private AndroidElement line3Email = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[6]/android.widget.TextView[1]")
-    private AndroidElement line5Password = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/passwordvisible")
-    private AndroidElement passVisible = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/passwordrepeatvisible")
-    private AndroidElement passRepeatVisible = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
+    private MobileElement titleBarTitle = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_youBian")
+    private MobileElement titleBarRight = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/rll_bark")
+    private MobileElement back = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
+    private MobileElement line1Country_Region = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[3]/android.widget.TextView[1]")
+    private MobileElement line2Country_Region = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[4]/android.widget.TextView[1]")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAStaticText[3]")
+    private MobileElement line3Email = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[6]/android.widget.TextView[1]")
+    private MobileElement line5Password = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/passwordvisible")
+    private MobileElement passVisible = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/passwordrepeatvisible")
+    private MobileElement passRepeatVisible = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/btn_register")
-    private AndroidElement btnRegister = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[4]")
+    private MobileElement btnRegister = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/rll_yuYan")
-    private AndroidElement layOutCountry = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[1]")
+    private MobileElement layOutCountry = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_email")
-    private AndroidElement editEmail = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIATextField[2]")
+    private MobileElement editEmail = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass")
-    private AndroidElement editPassword = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIASecureTextField[1]")
+    private MobileElement editPassword = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass_repeat")
-    private AndroidElement editRePassword = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_a")
-    private AndroidElement textViewAccept = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIASecureTextField[2]")
+    private MobileElement editRePassword = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_a")
+    private MobileElement textViewAccept = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_xieYi")
-    private AndroidElement textViewUserAgree = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
-    private AndroidElement textViewMessage = null;
+    private MobileElement textViewUserAgree = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
+    private MobileElement textViewMessage = null;
 
     private RegisterActivity(){
 
@@ -67,13 +76,17 @@ public class RegisterActivity {
         return registerActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        androidDriver = driver;
+        this.driver = driver;
     }
 
     public boolean showRegisterActivity(){
         return Common.getInstance().showActivity(btnRegister);
+    }
+
+    public void clickBack(){
+        back.click();
     }
 
     public boolean fill_Screenshot_Click(String strCountry, String strEmail, String strPass){
@@ -83,31 +96,44 @@ public class RegisterActivity {
         if(!CountrySelectActivity.getInstance().selectCountry(strCountry)){
             return false;
         }
+        //Can not find country
         if(!RegisterActivity.getInstance().showRegisterActivity()){
             logger.error("Can not find country--" + strCountry);
-            Common.getInstance().goBack(androidDriver, 2);
             return false;
         }
         editEmail.sendKeys(strEmail);
+        if(!Common.getInstance().isAndroid()){
+            //hide keyboard
+            line3Email.click();
+        }
         editPassword.sendKeys(strPass);
+        if(!Common.getInstance().isAndroid()){
+            //hide keyboard
+            line3Email.click();
+        }
         editRePassword.sendKeys(strPass);
         logger.info("Filled all information of user");
         //hide keyboard
-        Common.getInstance().goBack(androidDriver, 1);
-        //screen shot user agreement
-        clickAgreement();
-        if(strCountry.contains(" ")){
-            logger.info(strCountry);
-            strCountry = strCountry.replaceAll(" ", "_");
-            logger.info(strCountry);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+            //screen shot user agreement
+            clickAgreement();
+            if(strCountry.contains(" ")){
+                logger.info(strCountry);
+                strCountry = strCountry.replaceAll(" ", "_");
+                logger.info(strCountry);
+            }
+            Common.getInstance().screenShot("UserAgree_" + strCountry + ".png", driver);
+            Common.getInstance().goBack(driver, 1);
+            logger.info("Finished to screen shot user agreement!!!");
+        }else {
+            //hide keyboard
+            line3Email.click();
         }
-        Common.getInstance().screenShot("UserAgree_" + strCountry + ".png", androidDriver);
-        Common.getInstance().goBack(androidDriver, 1);
-        logger.info("Finished to screen shot user agreement!!!");
         //click register
         btnRegister.click();
-        //wait for end note;
-        Common.getInstance().showActivity(btnRegister);
+        //wait for end prompt;
+        Common.getInstance().waitForSecond(1500);
         try {
             if(textViewMessage.isDisplayed()){
                 logger.error("error message--" + textViewMessage.getText());
@@ -159,15 +185,21 @@ public class RegisterActivity {
                     tranMap.get("email"), "fail");
         }
         editPassword.sendKeys("e");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         passVisible.click();
         editPassword.clear();
 
         editRePassword.sendKeys("e");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         passRepeatVisible.click();
         editRePassword.clear();
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
 
         boolean beditEmail = editEmail.getText().equalsIgnoreCase(tranMap.get("Email"));
         if(!beditEmail){
@@ -231,7 +263,9 @@ public class RegisterActivity {
 
     private boolean invalidEmail(Map<String, String> tranMap){
         editEmail.sendKeys("e");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnRegister.click();
         boolean btextViewMessage = textViewMessage.getText().equalsIgnoreCase(tranMap.get("Email"));
         if(!btextViewMessage){
@@ -245,7 +279,9 @@ public class RegisterActivity {
     private boolean emptyPassword(Map<String, String> tranMap){
         editEmail.clear();
         editEmail.sendKeys(PropertyData.getProperty("hotmail_email"));
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnRegister.click();
         boolean btextViewMessage = textViewMessage.getText().equalsIgnoreCase(tranMap.get("pass_null"));
         if(!btextViewMessage){
@@ -258,7 +294,9 @@ public class RegisterActivity {
 
     private boolean invalidPassword(Map<String, String> tranMap){
         editPassword.sendKeys("1");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnRegister.click();
         boolean btextViewMessage = textViewMessage.getText().equalsIgnoreCase(tranMap.get("pass_geShi"));
         if(!btextViewMessage){
@@ -272,7 +310,9 @@ public class RegisterActivity {
     private boolean emptyRePassword(Map<String, String> tranMap){
         editPassword.clear();
         editPassword.sendKeys(PropertyData.getProperty("login_pass"));
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnRegister.click();
         boolean btextViewMessage = textViewMessage.getText().equalsIgnoreCase(tranMap.get("pass_null"));
         if(!btextViewMessage){
@@ -285,7 +325,9 @@ public class RegisterActivity {
 
     private boolean invalidRePassword(Map<String, String> tranMap){
         editRePassword.sendKeys("12");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnRegister.click();
         boolean btextViewMessage = textViewMessage.getText().equalsIgnoreCase(tranMap.get("pass_geShi"));
         if(!btextViewMessage){
@@ -299,7 +341,9 @@ public class RegisterActivity {
     private boolean passwordNotMatch(Map<String, String> tranMap){
         editRePassword.clear();
         editRePassword.sendKeys("123456cd");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnRegister.click();
         boolean btextViewMessage = textViewMessage.getText().equalsIgnoreCase(tranMap.get("password_two_no"));
         if(!btextViewMessage){
@@ -320,7 +364,9 @@ public class RegisterActivity {
         boolean bemptyRePassword = emptyRePassword(tranMap);
         boolean binvalidRePassword = invalidRePassword(tranMap);
         boolean bMatch = passwordNotMatch(tranMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         return bStaticUI && bEmptyEmail && bInvalidEmail &&
                 bbemptyPassword && binvalidPassword &&
                 bemptyRePassword && binvalidRePassword && bMatch;

@@ -2,10 +2,11 @@ package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,28 +20,36 @@ import java.util.Map;
 public class ForgetPassActivity {
     private static ForgetPassActivity forgetPassActivity = null;
     private static Logger logger = LoggerFactory.getLogger(ForgetPassActivity.class);
-    private AndroidDriver androidDriver = null;
+    private AppiumDriver driver = null;
 
     private ForgetPassActivity(){
 
     }
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
-    private AndroidElement titleForget = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
-    private AndroidElement line1Country_Region = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[3]/android.widget.TextView[1]")
-    private AndroidElement line2Country_Region = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/rll_yuYan")
-    private AndroidElement eleCountry = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/edt_email")
-    private AndroidElement editEmail = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/btn_send_email")
-    private AndroidElement btnSendEmail = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[4]/android.widget.TextView[1]")
-    private AndroidElement line3Email = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
-    private AndroidElement textMessage = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
+    private MobileElement titleForget = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAStaticText[1]")
+    private MobileElement line1Country_Region = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[3]/android.widget.TextView[1]")
+    private MobileElement line2Country_Region = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/rll_bark")
+    private MobileElement back = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/rll_yuYan")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[1]")
+    private MobileElement eleCountry = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_email")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIATextField[2]")
+    private MobileElement editEmail = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/btn_send_email")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[2]")
+    private MobileElement btnSendEmail = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[4]/android.widget.TextView[1]")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAStaticText[3]")
+    private MobileElement line3Email = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
+    private MobileElement textMessage = null;
 
 
     public static ForgetPassActivity getInstance(){
@@ -50,23 +59,32 @@ public class ForgetPassActivity {
         return forgetPassActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        this.androidDriver = driver;
+        this.driver = driver;
     }
 
     public boolean showActivity(){
         return Common.getInstance().showActivity(btnSendEmail);
     }
 
+    public void clickBack(){
+        back.click();
+    }
+
     public boolean sendEmail(String strCountry, String strEmail){
-        eleCountry.click();
+        /*eleCountry.click();
         if(!CountrySelectActivity.getInstance().selectCountry(strCountry)){
             logger.info("Select country failed!!!");
             return false;
-        }
+        }*/
         editEmail.sendKeys(strEmail);
-        Common.getInstance().goBack(androidDriver, 1);
+        //hide keyboard
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }else {
+            line3Email.click();
+        }
         btnSendEmail.click();
         logger.info("Finished to send verify email!!!");
         return true;
@@ -143,7 +161,9 @@ public class ForgetPassActivity {
     private boolean invalidEmail(Map<String, String> tranMap){
         editEmail.clear();
         editEmail.sendKeys("e");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnSendEmail.click();
         boolean btextMessage = textMessage.getText().equalsIgnoreCase(tranMap.get("enter_email"));
         if(!btextMessage){
@@ -156,15 +176,17 @@ public class ForgetPassActivity {
         return btextMessage;
     }
 
-    @FindBy(id = "android:id/alertTitle")
-    private AndroidElement propmtTitle = null;
-    @FindBy(id = "android:id/message")
-    private AndroidElement propmtMessage = null;
+    @AndroidFindBy(id = "android:id/alertTitle")
+    private MobileElement propmtTitle = null;
+    @AndroidFindBy(id = "android:id/message")
+    private MobileElement propmtMessage = null;
 
     private boolean notExistEmailprompt(Map<String, String> tranMap){
         editEmail.clear();
         editEmail.sendKeys("ecovacstest@hotmail.cim");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnSendEmail.click();
         String strTitle = propmtTitle.getText();
         boolean bpropmtTitle = strTitle.equalsIgnoreCase(tranMap.get("tips"));
@@ -193,7 +215,9 @@ public class ForgetPassActivity {
         boolean binvalidEmail = invalidEmail(tranMap);
         //too fast show, can not catch element
         //boolean bnotExistEmailprompt = notExistEmailprompt(tranMap);
-        Common.getInstance().goBack(androidDriver, 2);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 2);
+        }
         return bstaticUI && bemptyEmail && binvalidEmail;
     }
 }

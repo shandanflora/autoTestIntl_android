@@ -80,4 +80,41 @@ public class JsonParse {
         }
         return list;
     }
+
+    public List<MailInfo> getMailFromJson(String strFile, String strKey) {
+        List<MailInfo> mailList = new ArrayList();
+        String str="";
+        try {
+            InputStream inputstream = this.getClass().getClassLoader().getResourceAsStream(strFile);
+            str = inputStream2String(inputstream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (str == null) {
+            logger.error("(readDataFromJson)Not found data in json file!!!!");
+            return null;
+        }
+        try {
+            JSONObject jsonObj = new JSONObject(str);
+            JSONArray jsonArray = jsonObj.getJSONArray(strKey);
+            int iLength = jsonArray.length();
+            if (iLength == 0) {
+                logger.error("(readDataFromJson)Not found data with the key!!!!");
+                return null;
+            }
+            for (int i = 0; i < iLength; i++){
+                MailInfo mailInfo = new MailInfo();
+                JSONObject obj = jsonArray.getJSONObject(i);
+                mailInfo.setImapServer(obj.getString("server"));
+                mailInfo.setEmail(obj.getString("email"));
+                mailInfo.setPassword(obj.getString("password"));
+                mailList.add(mailInfo);
+            }
+        } catch (JSONException e) {
+            logger.error("(readDataFromJson)Could not find the value matched key!!!");
+            e.printStackTrace();
+        }
+        return mailList;
+    }
 }

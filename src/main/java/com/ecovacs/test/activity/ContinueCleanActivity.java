@@ -1,10 +1,10 @@
 package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -16,24 +16,24 @@ import java.util.Map;
 public class ContinueCleanActivity {
     private static ContinueCleanActivity continueCleanActivity = null;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
-    private AndroidElement title = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
-    private AndroidElement textViewline1 = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_moRenDate")
-    private AndroidElement textViewMessage = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/img_select")
-    private AndroidElement imageViewSwitch = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
-    private AndroidElement textViewLine3 = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement textViewStart = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
-    private AndroidElement textViewEnd = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_start_end")
-    private AndroidElement textViewTimeTitle = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_yinCang")
-    private AndroidElement textViewTimeCancel = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
+    private MobileElement title = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
+    private MobileElement textViewline1 = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_moRenDate")
+    private MobileElement textViewMessage = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/img_select")
+    private MobileElement imageViewSwitch = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
+    private MobileElement textViewLine3 = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    private MobileElement textViewStart = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
+    private MobileElement textViewEnd = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_start_end")
+    private MobileElement textViewTimeTitle = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_yinCang")
+    private MobileElement textViewTimeCancel = null;
 
 
     private ContinueCleanActivity(){
@@ -47,7 +47,7 @@ public class ContinueCleanActivity {
         return continueCleanActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

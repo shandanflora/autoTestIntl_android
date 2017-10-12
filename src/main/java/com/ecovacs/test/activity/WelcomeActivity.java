@@ -2,11 +2,11 @@ package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
-import com.ecovacs.test.common.TranslateIntl;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +23,11 @@ public class WelcomeActivity {
     /*private AndroidDriver androidDriver = null;*/
 
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/register")
-    private AndroidElement btnRegister = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[1]")
+    private MobileElement btnRegister = null;
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/login")
-    private AndroidElement btnLogin = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[2]")
+    private MobileElement btnLogin = null;
 
     private WelcomeActivity(){
 
@@ -38,7 +40,7 @@ public class WelcomeActivity {
         return welcomeActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         //androidDriver = driver;
     }

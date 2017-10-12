@@ -1,11 +1,10 @@
 package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.TranslateErrorReport;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import java.util.Map;
 
@@ -16,30 +15,30 @@ import java.util.Map;
 public class FullScreenActivity {
     private static FullScreenActivity fullScreenActivity = null;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/back_to_small")
-    private AndroidElement back = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_statues_large")
-    private AndroidElement currentStatus = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_image")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/back_to_small")
+    private MobileElement back = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_statues_large")
+    private MobileElement currentStatus = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_image")
     private MobileElement btnCharge = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_text")
-    private AndroidElement textCharge = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_image")
-    private AndroidElement btnAuto = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_text")
-    private AndroidElement textAuto = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[2]/android.widget.ImageView[1]")
-    private AndroidElement btnSpot = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
-    private AndroidElement textSpot = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_cleanarea_image")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_text")
+    private MobileElement textCharge = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_image")
+    private MobileElement btnAuto = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_text")
+    private MobileElement textAuto = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[2]/android.widget.ImageView[1]")
+    private MobileElement btnSpot = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
+    private MobileElement textSpot = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_cleanarea_image")
     private MobileElement btnArea = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_cleanarea_text")
-    private AndroidElement textArea = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_virtualwall_image")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_cleanarea_text")
+    private MobileElement textArea = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_virtualwall_image")
     private MobileElement btnVirtual = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_virtualwall_text")
-    private AndroidElement textVirtual = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_virtualwall_text")
+    private MobileElement textVirtual = null;
 
 
     private FullScreenActivity(){
@@ -53,7 +52,7 @@ public class FullScreenActivity {
         return fullScreenActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

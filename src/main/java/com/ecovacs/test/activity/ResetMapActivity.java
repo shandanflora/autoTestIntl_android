@@ -1,10 +1,10 @@
 package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -16,22 +16,22 @@ import java.util.Map;
 public class ResetMapActivity {
     private static ResetMapActivity resetMapActivity = null;
 
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement title = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
-    private AndroidElement descriptionLine1 = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]")
-    private AndroidElement descriptionLine2 = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/reset_consumables")
-    private AndroidElement btnResetMap = null;
-    @FindBy(id = "android:id/alertTitle")
-    private AndroidElement promptTitle = null;
-    @FindBy(id = "android:id/message")
-    private AndroidElement promptMessage = null;
-    @FindBy(id = "android:id/button2")
-    private AndroidElement btnNo = null;
-    @FindBy(id = "android:id/button1")
-    private AndroidElement btnYes = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    private MobileElement title = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
+    private MobileElement descriptionLine1 = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]")
+    private MobileElement descriptionLine2 = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/reset_consumables")
+    private MobileElement btnResetMap = null;
+    @AndroidFindBy(id = "android:id/alertTitle")
+    private MobileElement promptTitle = null;
+    @AndroidFindBy(id = "android:id/message")
+    private MobileElement promptMessage = null;
+    @AndroidFindBy(id = "android:id/button2")
+    private MobileElement btnNo = null;
+    @AndroidFindBy(id = "android:id/button1")
+    private MobileElement btnYes = null;
 
     private ResetMapActivity(){
 
@@ -44,7 +44,7 @@ public class ResetMapActivity {
         return resetMapActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

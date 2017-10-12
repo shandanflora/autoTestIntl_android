@@ -2,15 +2,13 @@ package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Test;
 
 import java.util.Map;
 
@@ -20,27 +18,27 @@ import java.util.Map;
  */
 public class TimeScheduleActivity {
     private static TimeScheduleActivity timeScheduleActivity = null;
-    private AndroidDriver driver;
+    private AppiumDriver driver;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/titleContent")
-    private AndroidElement title = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
-    private AndroidElement emptyList = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/add_appointment")
-    private AndroidElement btnAddTime = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tvAreas")
-    private AndroidElement cleanTask = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/replytime")
-    private AndroidElement repeatTime = null;
-    @FindBy(xpath = " //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
-    private AndroidElement deleteTime = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/title")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/titleContent")
+    private MobileElement title = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
+    private MobileElement emptyList = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/add_appointment")
+    private MobileElement btnAddTime = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tvAreas")
+    private MobileElement cleanTask = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/replytime")
+    private MobileElement repeatTime = null;
+    @AndroidFindBy(xpath = " //android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ListView[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
+    private MobileElement deleteTime = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title")
     private MobileElement delPromptTitle = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/content")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/content")
     private MobileElement delPromptContent = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/cancel")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/cancel")
     private MobileElement delPromptCancel = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/sure")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/sure")
     private MobileElement delPromptSure = null;
 
     private TimeScheduleActivity(){
@@ -54,7 +52,7 @@ public class TimeScheduleActivity {
         return timeScheduleActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         this.driver = driver;
     }
@@ -87,8 +85,7 @@ public class TimeScheduleActivity {
     }
 
     public boolean translate(Map<String, String> tranMap){
-        boolean bStatic = staticUITranslate(tranMap);
-        return bStatic;
+        return staticUITranslate(tranMap);
     }
 
     public void clickAddSchedule(){

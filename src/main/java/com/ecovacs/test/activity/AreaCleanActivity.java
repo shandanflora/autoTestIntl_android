@@ -1,10 +1,10 @@
 package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -16,14 +16,14 @@ import java.util.Map;
 public class AreaCleanActivity {
     private static AreaCleanActivity areaCleanActivity = null;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/map_tip")
-    private AndroidElement message = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/rll_bianJi")
-    private AndroidElement btnEdit = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/cancle_select")
-    private AndroidElement btnCancel = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/confirm_select")
-    private AndroidElement btnConfirmSelect = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/map_tip")
+    private MobileElement message = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/rll_bianJi")
+    private MobileElement btnEdit = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/cancle_select")
+    private MobileElement btnCancel = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/confirm_select")
+    private MobileElement btnConfirmSelect = null;
 
     private AreaCleanActivity(){
 
@@ -36,7 +36,7 @@ public class AreaCleanActivity {
         return areaCleanActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

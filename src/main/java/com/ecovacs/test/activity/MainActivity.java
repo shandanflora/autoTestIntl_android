@@ -2,12 +2,12 @@ package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,20 +22,23 @@ import java.util.Map;
 public class MainActivity {
     private static MainActivity mainActivity = null;
     private static Logger logger = LoggerFactory.getLogger(RegisterActivity.class);
-    private AndroidDriver androidDriver = null;
+    private AppiumDriver driver = null;
 
     private MainActivity(){
 
     }
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/right")
-    private AndroidElement textViewMore = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement textViewFooter = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/head_tipsTextView")
-    private AndroidElement textViewHeader = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/listView_device")
-    private AndroidElement listView = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[3]")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/right")
+    private MobileElement textViewMore = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAStaticText[1]")
+    private MobileElement textViewFooter = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/head_tipsTextView")
+    private MobileElement textViewHeader = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/listView_device")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIATableView[1]")
+    private MobileElement listView = null;
 
     public static MainActivity getInstance(){
         if (mainActivity == null){
@@ -44,13 +47,13 @@ public class MainActivity {
         return mainActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        this.androidDriver = driver;
+        this.driver = driver;
     }
 
     public boolean showActivity(){
-       return Common.getInstance().showActivity(textViewMore);
+       return Common.getInstance().showActivity(textViewFooter);
     }
 
     public void clickMore(){
@@ -72,12 +75,12 @@ public class MainActivity {
     }
 
     private void pullDown(){
-        int width = androidDriver.manage().window().getSize().width;
-        int height = androidDriver.manage().window().getSize().height;
+        int width = driver.manage().window().getSize().width;
+        int height = driver.manage().window().getSize().height;
 
         for(int i = 0; i < 10; i++)
         {
-            androidDriver.swipe(width/2, height/2, width/2, height * 3/4, 200);
+            driver.swipe(width/2, height/2, width/2, height * 3/4, 200);
         }
     }
 

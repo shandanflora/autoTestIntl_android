@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="VerifyEmail">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../VerifyEmail/target/VerifyEmail.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,11 +1,10 @@
 package com.ecovacs.test.activity;
 
-import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -17,24 +16,24 @@ import java.util.Map;
 public class RepetitionActivity {
     private static RepetitionActivity repetitionActivity = null;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/titleContent")
-    private AndroidElement title = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
-    private AndroidElement back = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
-    private AndroidElement sunday = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.TextView[1]")
-    private AndroidElement monday = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[4]/android.widget.TextView[1]")
-    private AndroidElement tuesday = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[5]/android.widget.TextView[1]")
-    private AndroidElement wednesday = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[6]/android.widget.TextView[1]")
-    private AndroidElement thursday = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[7]/android.widget.TextView[1]")
-    private AndroidElement friday = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[8]/android.widget.TextView[1]")
-    private AndroidElement saturday = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/titleContent")
+    private MobileElement title = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
+    private MobileElement back = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
+    private MobileElement sunday = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.TextView[1]")
+    private MobileElement monday = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[4]/android.widget.TextView[1]")
+    private MobileElement tuesday = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[5]/android.widget.TextView[1]")
+    private MobileElement wednesday = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[6]/android.widget.TextView[1]")
+    private MobileElement thursday = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[7]/android.widget.TextView[1]")
+    private MobileElement friday = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[8]/android.widget.TextView[1]")
+    private MobileElement saturday = null;
 
     private RepetitionActivity(){
 
@@ -47,35 +46,35 @@ public class RepetitionActivity {
         return repetitionActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    public void clickSun(){
+    private void clickSun(){
         sunday.click();
     }
 
-    public void clickMon(){
+    private void clickMon(){
         monday.click();
     }
 
-    public void clickTues(){
+    private void clickTues(){
         tuesday.click();
     }
 
-    public void clickWed(){
+    private void clickWed(){
         wednesday.click();
     }
 
-    public void clickThurs(){
+    private void clickThurs(){
         thursday.click();
     }
 
-    public void clickFri(){
+    private void clickFri(){
         friday.click();
     }
 
-    public void clickSat(){
+    private void clickSat(){
         saturday.click();
     }
 

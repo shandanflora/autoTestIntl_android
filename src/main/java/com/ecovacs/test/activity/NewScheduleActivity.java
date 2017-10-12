@@ -2,13 +2,12 @@ package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -20,48 +19,48 @@ import java.util.Map;
  */
 public class NewScheduleActivity {
     private static NewScheduleActivity newScheduleActivity = null;
-    private AndroidDriver driver = null;
+    private AppiumDriver driver = null;
     //private static Logger logger = LoggerFactory.getLogger(NewScheduleActivity.class);
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/titleContent")
-    private AndroidElement title = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/right")
-    private AndroidElement confirmAdd = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
-    private AndroidElement cancel = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
-    private AndroidElement scheduleTask = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tvSelectArea")
-    private AndroidElement noSelected = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tvAreaAll")
-    private AndroidElement areaAll = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tvAreaSingle")
-    private AndroidElement areaSingle = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[3]")
-    private AndroidElement setTime = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
-    private AndroidElement startTime = null;
-    @FindBy(xpath = " //android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement promptStartTitle = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/cancel_btn")
-    private AndroidElement promptCancel = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/ok_btn")
-    private AndroidElement promptOK = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.TextView[1]")
-    private AndroidElement repeat = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/repeatText")
-    private AndroidElement repeatValue = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/delete_appointment_tv")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/titleContent")
+    private MobileElement title = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/right")
+    private MobileElement confirmAdd = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
+    private MobileElement cancel = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
+    private MobileElement scheduleTask = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tvSelectArea")
+    private MobileElement noSelected = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tvAreaAll")
+    private MobileElement areaAll = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tvAreaSingle")
+    private MobileElement areaSingle = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[3]")
+    private MobileElement setTime = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.TextView[1]")
+    private MobileElement startTime = null;
+    @AndroidFindBy(xpath = " //android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    private MobileElement promptStartTitle = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/cancel_btn")
+    private MobileElement promptCancel = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/ok_btn")
+    private MobileElement promptOK = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.TextView[1]")
+    private MobileElement repeat = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/repeatText")
+    private MobileElement repeatValue = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/delete_appointment_tv")
     private MobileElement delSchedule = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/title")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title")
     private MobileElement delPromptTitle = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/content")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/content")
     private MobileElement delPromptContent = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/cancel")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/cancel")
     private MobileElement delPromptCancel = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/sure")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/sure")
     private MobileElement delPromptSure = null;
-    @FindBy(xpath = "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TimePicker[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.NumberPicker[1]")
+    @AndroidFindBy(xpath = "//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TimePicker[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.NumberPicker[1]")
     private MobileElement picker = null;
 
     private NewScheduleActivity(){
@@ -75,7 +74,7 @@ public class NewScheduleActivity {
         return newScheduleActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         this.driver = driver;
     }

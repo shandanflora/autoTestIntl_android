@@ -3,10 +3,11 @@ package com.ecovacs.test.activity;
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.PropertyData;
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,34 +22,43 @@ import java.util.Map;
 public class LoginActivity {
     private static LoginActivity loginActivity = null;
     private static Logger logger = LoggerFactory.getLogger(LoginActivity.class);
-    private AndroidDriver androidDriver = null;
+    private AppiumDriver driver = null;
 
     private LoginActivity(){}
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
-    private AndroidElement titleLogin = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_youBian")
-    private AndroidElement headRight = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement line1Country_Region = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement line2Country_Region = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement line3Email_Pass = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/lly_select_country")
-    private AndroidElement eleCountry = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/edt_email")
-    private AndroidElement editEmail = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass")
-    private AndroidElement editPass = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_show_pass")
-    private AndroidElement textViewShowPass = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/btn_login")
-    private AndroidElement btnLogin = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_pass_recover")
-    private AndroidElement textViewForget = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
-    private AndroidElement textViewMessage = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
+    private MobileElement titleLogin = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_youBian")
+    private MobileElement headRight = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[2]")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/rll_bark")
+    private MobileElement back = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    private MobileElement line1Country_Region = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    private MobileElement line2Country_Region = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[3]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAStaticText[4]")
+    private MobileElement line3Email_Pass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/lly_select_country")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[3]")
+    private MobileElement eleCountry = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_email")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIATextField[3]")
+    private MobileElement editEmail = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIASecureTextField[1]")
+    private MobileElement editPass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_show_pass")
+    private MobileElement textViewShowPass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/btn_login")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[6]")
+    private MobileElement btnLogin = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_pass_recover")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAButton[7]")
+    private MobileElement textViewForget = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
+    private MobileElement textViewMessage = null;
 
     public static LoginActivity getInstance(){
         if(loginActivity == null){
@@ -57,9 +67,9 @@ public class LoginActivity {
         return loginActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        this.androidDriver = driver;
+        this.driver = driver;
     }
 
     public void clickForgetPass(){
@@ -74,9 +84,19 @@ public class LoginActivity {
         eleCountry.click();
     }
 
+    public void clickBack(){
+        back.click();
+    }
+
     public void fillInfoAndClick(String strEmail, String strPass){
         editEmail.sendKeys(strEmail);
+        if (!Common.getInstance().isAndroid()){
+            line3Email_Pass.click();
+        }
         editPass.sendKeys(strPass);
+        if (!Common.getInstance().isAndroid()){
+            line3Email_Pass.click();
+        }
         btnLogin.click();
     }
 
@@ -131,7 +151,9 @@ public class LoginActivity {
                     tranMap.get("Email"), "fail");
         }
         editPass.sendKeys("e");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         textViewShowPass.click();
         editPass.clear();
         boolean beditPass = editPass.getText().equalsIgnoreCase(tranMap.get("email_pass_8_20"));
@@ -212,7 +234,9 @@ public class LoginActivity {
         editEmail.sendKeys(PropertyData.getProperty("hotmail_email"));
         editPass.clear();
         editPass.sendKeys("1234");
-        Common.getInstance().goBack(androidDriver, 1);
+        if (Common.getInstance().isAndroid()){
+            Common.getInstance().goBack(driver, 1);
+        }
         btnLogin.click();
         boolean btextViewMessage = textViewMessage.getText().equalsIgnoreCase(tranMap.get("pass_geShi"));
         if(!btextViewMessage){

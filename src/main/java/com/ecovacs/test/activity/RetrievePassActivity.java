@@ -1,10 +1,11 @@
 package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
@@ -14,14 +15,18 @@ import org.openqa.selenium.support.PageFactory;
 public class RetrievePassActivity {
     private static RetrievePassActivity retrievePassActivity = null;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_youBian")
-    private AndroidElement textViewLogin = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/rll_bark")
-    private AndroidElement textViewBack = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_wangJiMimaInfo")
-    private AndroidElement textViewForgetInfo = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_access_email")
-    private AndroidElement textViewResInfo = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_youBian")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[3]")
+    private MobileElement textViewLogin = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/rll_bark")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
+    private MobileElement textViewBack = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_wangJiMimaInfo")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAStaticText[2]")
+    private MobileElement textViewForgetInfo = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_access_email")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAStaticText[2]")
+    private MobileElement textViewResInfo = null;
 
     private RetrievePassActivity(){
 
@@ -34,7 +39,7 @@ public class RetrievePassActivity {
         return retrievePassActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 

@@ -1,10 +1,11 @@
 package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -16,20 +17,23 @@ import java.util.Map;
 public class SettingActivity {
     private static SettingActivity settingActivity = null;
 
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
-    private AndroidElement title = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/Job_log")
-    private AndroidElement textViewWorkLog = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_fangDaRao")
-    private AndroidElement textViewContinuedClean = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/appointment_time")
-    private AndroidElement textViewTimeSchedule = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/resetMapText")
-    private AndroidElement textViewReset = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhuJiDuoYuYan")
-    private AndroidElement textViewLanguage = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
-    private AndroidElement textViewFirmware = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.TextView[1]")
+    private MobileElement title = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[2]")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
+    private MobileElement back = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/Job_log")
+    private MobileElement textViewWorkLog = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_fangDaRao")
+    private MobileElement textViewContinuedClean = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/appointment_time")
+    private MobileElement textViewTimeSchedule = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/resetMapText")
+    private MobileElement textViewReset = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhuJiDuoYuYan")
+    private MobileElement textViewLanguage = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[1]")
+    private MobileElement textViewFirmware = null;
 
     private SettingActivity(){
 
@@ -42,8 +46,12 @@ public class SettingActivity {
         return settingActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
+
+    public void clickBack(){
+        back.click();
     }
 
     public void clickWorkLog(){

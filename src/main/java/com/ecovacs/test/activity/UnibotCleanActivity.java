@@ -2,10 +2,11 @@ package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,34 +21,37 @@ public class UnibotCleanActivity {
     private static UnibotCleanActivity unibotCleanActivity = null;
     private static Logger logger = LoggerFactory.getLogger(UnibotCleanActivity.class);
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_statues")
-    private AndroidElement textViewStatusValue = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]")
-    private AndroidElement textViewStatus = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_statues")
+    private MobileElement textViewStatusValue = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.TextView[2]")
+    private MobileElement textViewStatus = null;
     /*@FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_battery_statues")
     private AndroidElement textViewBatteryValue = null;*/
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tvBatterystatus")
-    private AndroidElement textViewDeBattery = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_image")
-    private AndroidElement btnAuto = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_text")
-    private AndroidElement textViewDeAuto = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_text")
-    private AndroidElement textViewDeCharge = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_image")
-    private AndroidElement btnCharge = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/eco_action_more")
-    private AndroidElement imageBtnRight = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/goto_full_screen")
-    private AndroidElement imageViewFullScreen = null;
-    @FindBy(id ="android:id/alertTitle")
-    private AndroidElement promptTitle = null;
-    @FindBy(id = "android:id/message")
-    private AndroidElement promptMessage = null;
-    @FindBy(id = "android:id/button2")
-    private AndroidElement promptBtnCancel = null;
-    @FindBy(id = "android:id/button1")
-    private AndroidElement promptBtnConfirm = null;
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[2]")
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
+    private MobileElement textViewBack = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tvBatterystatus")
+    private MobileElement textViewDeBattery = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_image")
+    private MobileElement btnAuto = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_auto_text")
+    private MobileElement textViewDeAuto = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_text")
+    private MobileElement textViewDeCharge = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/deebot_return_image")
+    private MobileElement btnCharge = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/eco_action_more")
+    private MobileElement imageBtnRight = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/goto_full_screen")
+    private MobileElement imageViewFullScreen = null;
+    @AndroidFindBy(id ="android:id/alertTitle")
+    private MobileElement promptTitle = null;
+    @AndroidFindBy(id = "android:id/message")
+    private MobileElement promptMessage = null;
+    @AndroidFindBy(id = "android:id/button2")
+    private MobileElement promptBtnCancel = null;
+    @AndroidFindBy(id = "android:id/button1")
+    private MobileElement promptBtnConfirm = null;
 
 
     private UnibotCleanActivity() {
@@ -61,12 +65,16 @@ public class UnibotCleanActivity {
         return unibotCleanActivity;
     }
 
-    public void init(AndroidDriver driver) {
+    public void init(AppiumDriver driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
     public boolean showHaveMapActivity(){
         return Common.getInstance().showActivity(imageViewFullScreen);
+    }
+
+    public void clickBack(){
+        textViewBack.click();
     }
 
     public boolean showText(String strText) {

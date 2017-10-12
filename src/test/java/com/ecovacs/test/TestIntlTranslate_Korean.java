@@ -2,6 +2,7 @@ package com.ecovacs.test;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.PropertyData;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
  * test translate of intl app
  */
 public class TestIntlTranslate_Korean {
-    private AndroidDriver driver = null;
+    private AppiumDriver driver = null;
 
     @BeforeClass
     public void setUp(){

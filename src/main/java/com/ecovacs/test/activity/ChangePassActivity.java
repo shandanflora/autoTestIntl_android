@@ -2,10 +2,10 @@ package com.ecovacs.test.activity;
 
 import com.ecovacs.test.common.Common;
 import com.ecovacs.test.common.TranslateErrorReport;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
@@ -16,28 +16,28 @@ import java.util.Map;
  */
 public class ChangePassActivity {
     private static ChangePassActivity changePassActivity = null;
-    private AndroidDriver driver = null;
+    private AppiumDriver driver = null;
 
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
-    private AndroidElement textMessage = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
-    private AndroidElement title = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
-    private AndroidElement line1_Old = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass_old")
-    private AndroidElement editOldPass = null;
-    @FindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[4]/android.widget.TextView[1]")
-    private AndroidElement line3_new = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass_new")
-    private AndroidElement editNewPass = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_show_pass1")
-    private AndroidElement showPass = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass_new_queRen")
-    private AndroidElement editRePass = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_show_pass2")
-    private AndroidElement showRePass = null;
-    @FindBy(id = "com.ecovacs.ecosphere.intl:id/btn_pass_update")
-    private AndroidElement btnSavePass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_message")
+    private MobileElement textMessage = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_zhongJian")
+    private MobileElement title = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[2]/android.widget.TextView[1]")
+    private MobileElement line1_Old = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass_old")
+    private MobileElement editOldPass = null;
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[4]/android.widget.TextView[1]")
+    private MobileElement line3_new = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass_new")
+    private MobileElement editNewPass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_show_pass1")
+    private MobileElement showPass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/edt_pass_new_queRen")
+    private MobileElement editRePass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/tv_is_show_pass2")
+    private MobileElement showRePass = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/btn_pass_update")
+    private MobileElement btnSavePass = null;
 
     private ChangePassActivity(){
 
@@ -50,7 +50,7 @@ public class ChangePassActivity {
         return changePassActivity;
     }
 
-    public void init(AndroidDriver driver){
+    public void init(AppiumDriver driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         this.driver = driver;
     }

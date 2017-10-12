@@ -1,10 +1,13 @@
 package com.ecovacs.test.activity;
 
+import com.ecovacs.test.common.Common;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
@@ -21,11 +24,13 @@ public class CountrySelectActivity {
     private static CountrySelectActivity countrySelectActivity = null;
 
     @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/right")
-    private AndroidElement btnOK = null;
-    /*@AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
-    private AndroidElement btnBack = null;*/
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[3]")
+    private MobileElement btnOK = null;
+    @AndroidFindBy(id = "com.ecovacs.ecosphere.intl:id/title_back")
+    @iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
+    private MobileElement btnBack = null;
 
-    private AndroidDriver androidDriver = null;
+    private AppiumDriver driver = null;
 
     private CountrySelectActivity(){
 
@@ -38,25 +43,33 @@ public class CountrySelectActivity {
         return countrySelectActivity;
     }
 
-    public void init(AndroidDriver androidDriver){
-        PageFactory.initElements(new AppiumFieldDecorator(androidDriver), this);
-        this.androidDriver = androidDriver;
+    public void init(AppiumDriver driver){
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+        this.driver = driver;
     }
 
-    /*public void back(){
+    public void back(){
         btnBack.click();
-    }*/
+    }
 
     public boolean selectCountry(String strCountry){
         //androidDriver.scrollTo(strCountry).click();
         //String str = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"Japan\").instance(0))";
-
-        String str = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(";
-        str = str + "\"" + strCountry + "\"" + ").instance(0))";
+        String str;
         MobileElement textViewCountry;
         try {
-            textViewCountry = (MobileElement) androidDriver
-                    .findElementByAndroidUIAutomator(str);
+            if (Common.getInstance().isAndroid()){
+                str = "new UiScrollable(new UiSelector().scrollable(true).instance(0))." +
+                        "scrollIntoView(new UiSelector().textContains("
+                        + "\"" + strCountry + "\"" + ").instance(0))";
+                textViewCountry = (MobileElement) ((AndroidDriver)driver)
+                        .findElementByAndroidUIAutomator(str);
+            }else {
+                str = "UIATarget.localTarget().frontMostApp().mainWindow()." +
+                        "tableViews()[0].cells()[\"" + strCountry + "\"]";
+                textViewCountry = (MobileElement) ((IOSDriver)driver)
+                        .findElementByIosUIAutomation(str);
+            }
         }catch (NoSuchElementException e){
             logger.error("Can not find country: " + strCountry);
             return false;

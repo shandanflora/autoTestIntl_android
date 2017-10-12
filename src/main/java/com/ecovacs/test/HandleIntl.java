@@ -2,10 +2,12 @@ package com.ecovacs.test;
 
 import com.ecovacs.test.activity.*;
 import com.ecovacs.test.common.*;
-import io.appium.java_client.android.AndroidDriver;
+import com.ecovacs.test.verifyEmail.ImapMailBox;
+import io.appium.java_client.AppiumDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +18,7 @@ import java.util.Map;
 public class HandleIntl {
     private static Logger logger = LoggerFactory.getLogger(HandleIntl.class);
     private static HandleIntl handleIntl = null;
-    private AndroidDriver androidDriver = null;
+    private AppiumDriver appiumDriver = null;
     private Map<String, String> languageMap = null;
 
     private HandleIntl(){
@@ -31,41 +33,41 @@ public class HandleIntl {
     }
 
     void initAppium(){
-        AndroidDriver driver = Common.getInstance().getDriver();
+        AppiumDriver driver = Common.getInstance().getDriver();
         if(driver == null){
             return;
         }
         HandleIntl.getInstance().init(driver);
     }
 
-    public void init(AndroidDriver driver){
-        androidDriver = driver;
-        AboutActivity.getInstance().init(androidDriver);
-        AreaCleanActivity.getInstance().init(androidDriver);
-        ChangePassActivity.getInstance().init(androidDriver);
-        ContinueCleanActivity.getInstance().init(androidDriver);
-        CountrySelectActivity.getInstance().init(androidDriver);
-        FirmVerActivity.getInstance().init(androidDriver);
-        ForgetPassActivity.getInstance().init(androidDriver);
-        FullScreenActivity.getInstance().init(androidDriver);
-        LanguageActivity.getInstance().init(androidDriver);
-        LoginActivity.getInstance().init(androidDriver);
-        MainActivity.getInstance().init(androidDriver);
-        MoreActivity.getInstance().init(androidDriver);
-        NewScheduleActivity.getInstance().init(androidDriver);
-        RegisterActivity.getInstance().init(androidDriver);
-        RepetitionActivity.getInstance().init(androidDriver);
-        ResetMapActivity.getInstance().init(androidDriver);
-        RetrievePassActivity.getInstance().init(androidDriver);
-        SettingActivity.getInstance().init(androidDriver);
-        SpotCleanActivity.getInstance().init(androidDriver);
-        TimeScheduleActivity.getInstance().init(androidDriver);
-        UnibotCleanActivity.getInstance().init(androidDriver);
-        UserAgreeActivity.getInstance().init(androidDriver);
-        VirtualWallActivity.getInstance().init(androidDriver);
-        VoiceReportActivity.getInstance().init(androidDriver);
-        WelcomeActivity.getInstance().init(androidDriver);
-        WorkLogActivity.getInstance().init(androidDriver);
+    public void init(AppiumDriver driver){
+        appiumDriver = driver;
+        AboutActivity.getInstance().init(appiumDriver);
+        AreaCleanActivity.getInstance().init(appiumDriver);
+        ChangePassActivity.getInstance().init(appiumDriver);
+        ContinueCleanActivity.getInstance().init(appiumDriver);
+        CountrySelectActivity.getInstance().init(appiumDriver);
+        FirmVerActivity.getInstance().init(appiumDriver);
+        ForgetPassActivity.getInstance().init(appiumDriver);
+        FullScreenActivity.getInstance().init(appiumDriver);
+        LanguageActivity.getInstance().init(appiumDriver);
+        LoginActivity.getInstance().init(appiumDriver);
+        MainActivity.getInstance().init(appiumDriver);
+        MoreActivity.getInstance().init(appiumDriver);
+        NewScheduleActivity.getInstance().init(appiumDriver);
+        RegisterActivity.getInstance().init(appiumDriver);
+        RepetitionActivity.getInstance().init(appiumDriver);
+        ResetMapActivity.getInstance().init(appiumDriver);
+        RetrievePassActivity.getInstance().init(appiumDriver);
+        SettingActivity.getInstance().init(appiumDriver);
+        SpotCleanActivity.getInstance().init(appiumDriver);
+        TimeScheduleActivity.getInstance().init(appiumDriver);
+        UnibotCleanActivity.getInstance().init(appiumDriver);
+        UserAgreeActivity.getInstance().init(appiumDriver);
+        VirtualWallActivity.getInstance().init(appiumDriver);
+        VoiceReportActivity.getInstance().init(appiumDriver);
+        WelcomeActivity.getInstance().init(appiumDriver);
+        WorkLogActivity.getInstance().init(appiumDriver);
     }
 
     boolean enterWelcomeActivity(){
@@ -87,57 +89,95 @@ public class HandleIntl {
     }
 
     /**
-     * verify email
-     * @param strJar jar file
-     * @param strCountry country
-     * @param strMail email
-     * @param strType handle type, ex:Register
+     *
+     @param args:
+      *            [0:country]
+      *            [1:type]
+      *            [2:imap_server]
+      *            [3:e-mail]
+      *            [4:password]
+      *            [5:time(click send email)]
      */
-
-    private void verifyEmail(String strJar, String strCountry, String strMail, String strType){
-        String strPath = RegisterActivity.class.getResource("/").getPath();
-        strPath = strPath + "../../" + strJar;
-        File fileApp = new File(strPath);
-        logger.info(strPath);
-        Common.getInstance().executeCommand("java -jar " + fileApp.getName() + " " + strCountry + " " + strMail + " " + strType);
-        logger.info("********exec command finished!!!");
+    private int verifyEmail(String args[]){
+//        String strPath = RegisterActivity.class.getResource("/").getPath();
+//        strPath = strPath + "../../" + strJar;
+//        File fileApp = new File(strPath);
+//        logger.info(strPath);
+        //[0:country][1:type][2:imap_server][3:e-mail][4:password][5:time(click send email)]
+        logger.info("[0:country]--" + args[0]);
+        logger.info("[1:type]--" + args[1]);
+        logger.info("[2:imap_server]--" + args[2]);
+        logger.info("[3:e-mail]--" + args[3]);
+        logger.info("[4:password]--" + args[4]);
+        logger.info("[5:time]--" + args[5]);
+        if(args[0].contains(" ")){
+            logger.info(args[0]);
+            args[0] = args[0].replaceAll(" ", "_");
+            logger.info(args[0]);
+        }
+        return ImapMailBox.getInstance().verifyEmail(args);
+        //Common.getInstance().executeCommand("java -jar " + fileApp.getName() + " " + strCountry + " " + strType + " " + strServer + " " + strMail + " " + strPassword);
     }
 
-    /*public void goBack(int iNum){
-        Common.getInstance().goBack(androidDriver, iNum);
-    }*/
+    private String getCurTime(){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
 
-    boolean registerAndLogin(String strCountry, String strEmailType, String strEmail, String strPass){
+    }
+
+    boolean registerAndLogin(String strCountry, String strServer, String strEmail, String strPass){
         //register
         if(!enterRegisterActivity()){
             return false;
         }
-        if (!RegisterActivity.getInstance().fill_Screenshot_Click(strCountry, strEmail, strPass)) {
+        if (!RegisterActivity.getInstance().fill_Screenshot_Click(strCountry, strEmail, PropertyData.getProperty("register_pass"))) {
             logger.error("Register failed!!! country--" + strCountry);
             Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.ALREADY_REGISTER);
-            Common.getInstance().goBack(androidDriver, 1);
+            RegisterActivity.getInstance().clickBack();
             return false;
         }
         if(!RetrievePassActivity.getInstance().ShowResisterConfirmActivity()){
             Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.ALREADY_REGISTER);
-            Common.getInstance().goBack(androidDriver, 1);
-            logger.error("Not show Retrieve confirm activity!!!");
+            RegisterActivity.getInstance().clickBack();
+            logger.error("Not show Retrieve confirm email activity!!!");
             return false;
         }
+        String strTime = getCurTime();
         logger.info("Show active email activity!!!");
         Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.SENDED_EMAIL);
         //verify email
-        verifyEmail("VerifyEmail.one-jar.jar", strCountry, strEmailType, "Register");
-        //check--login with new password
-        RetrievePassActivity.getInstance().clickLogin();
-        if (!loginWithoutWelcome(strCountry, strEmail, strPass)) {
+        //[0:country][1:type][2:imap_server][3:e-mail][4:password][5:time(click send email)]
+        String args[] = new String[6];
+        args[0] = strCountry;
+        args[1] = "Register";
+        args[2] = strServer;
+        args[3] = strEmail;
+        args[4] = strPass;
+        args[5] = strTime;
+        if(1 != verifyEmail(args)){
+            return false;
+        }
+        if (Common.getInstance().isAndroid()){
+            //check--login with new password
+            RetrievePassActivity.getInstance().clickLogin();
+        }else {
+            //check--login with new password
+            //return register activity
+            RetrievePassActivity.getInstance().clickBack();
+            //return welcome activity
+            RegisterActivity.getInstance().clickBack();
+            WelcomeActivity.getInstance().clickLogin();
+        }
+        if (!loginWithoutWelcome(strCountry, strEmail, PropertyData.getProperty("register_pass"))) {
             logger.info("Login failed country- " + strCountry);
             Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.REGISTER_FAILED);
+            LoginActivity.getInstance().clickBack();
             return false;
         }
         if (!logout()) {
             logger.info("Logout failed country- " + strCountry);
-            Common.getInstance().goBack(androidDriver, 1);
+            //Common.getInstance().goBack(androidDriver, 1);
             return false;
         }
         return true;
@@ -153,19 +193,21 @@ public class HandleIntl {
         return true;
     }
 
-    boolean forgetPassword(String strCountry, String strEmailType, String strEmail, String strPass){
+    boolean forgetPassword(String strCountry, String strServer, String strEmail, String strPass){
         if(!enterLoginAcivity()){
             return false;
         }
         LoginActivity.getInstance().clickForgetPass();
         logger.info("Click forget password!!!");
-        if (!ForgetPassActivity.getInstance().showActivity()) {
-            Common.getInstance().goBack(androidDriver, 1);
-            logger.error("Not show forget password activity!!!");
-            return false;
-        }
+//        if (!ForgetPassActivity.getInstance().showActivity()) {
+//            LoginActivity.getInstance().clickBack();
+//            logger.error("Not show forget password activity!!!");
+//            return false;
+//        }
+        Common.getInstance().waitForSecond(300);
         if (!ForgetPassActivity.getInstance().sendEmail(strCountry, strEmail)) {
-            Common.getInstance().goBack(androidDriver, 2);
+            ForgetPassActivity.getInstance().clickBack();
+            LoginActivity.getInstance().clickBack();
             Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.NOT_REGISTER);
             logger.error("Not show retrieve password activity!!!");
             return false;
@@ -173,17 +215,30 @@ public class HandleIntl {
         logger.info("Click send verify email!!!");
         if (!RetrievePassActivity.getInstance().showRetrieveConfirmActivity()) {
             logger.error("Not show retrieve password activity!!!");
-            Common.getInstance().goBack(androidDriver, 2);
+            RetrievePassActivity.getInstance().clickBack();
+            LoginActivity.getInstance().clickBack();
             return false;
             //invalid email
         }
+        String strTime = getCurTime();
         logger.info("Show retrieve password activity!!!");
-        verifyEmail("VerifyEmail.one-jar.jar", strCountry, strEmailType, "DoFindPass");
+        //verify email
+        //[0:country][1:type][2:imap_server][3:e-mail][4:password][5:time(click send email)]
+        String args[] = new String[6];
+        args[0] = strCountry;
+        args[1] = "DoFindPass";
+        args[2] = strServer;
+        args[3] = strEmail;
+        args[4] = strPass;
+        args[5] = strTime;
+        if(1 != verifyEmail(args)){
+            return false;
+        }
         //check--login with new password
         RetrievePassActivity.getInstance().clickLogin();
-        if (!loginWithoutWelcome(strCountry, strEmail, strPass)) {
+        if (!loginWithoutWelcome(strCountry, strEmail, PropertyData.getProperty("login_pass"))) {
             logger.info("Login failed after forget password country- " + strCountry);
-            Common.getInstance().goBack(androidDriver, 1);
+            LoginActivity.getInstance().clickBack();
             return false;
         }
         if (!logout()) {
@@ -199,10 +254,10 @@ public class HandleIntl {
             return false;
         }
         logger.info("Show login activity!!!");
-        LoginActivity.getInstance().clickCountry();
+        /*LoginActivity.getInstance().clickCountry();
         if(!CountrySelectActivity.getInstance().selectCountry(strCountry)){
             return false;
-        }
+        }*/
         logger.info("Finished to select country!!!");
         LoginActivity.getInstance().fillInfoAndClick(strEmail, strPass);
         logger.info("Finished to click login!!!");
@@ -231,7 +286,7 @@ public class HandleIntl {
             return false;
         }
         MoreActivity.getInstance().clickLogout();
-        MoreActivity.getInstance().clickConfirm();
+        //MoreActivity.getInstance().clickConfirm();
         return WelcomeActivity.getInstance().showWelcomeActivity();
     }
 
@@ -249,9 +304,9 @@ public class HandleIntl {
 
     void changeLanguage(String strLanguage){
         //return deebot clean
-        Common.getInstance().goBack(androidDriver, 1);
+        SettingActivity.getInstance().clickBack();
         //return main
-        Common.getInstance().goBack(androidDriver, 1);
+        UnibotCleanActivity.getInstance().clickBack();
         /*if(!login("Japan", PropertyData.getProperty("hotmail_email"), PropertyData.getProperty("login_pass"))){
             logger.error("login failed!!!");
             return;
@@ -261,7 +316,7 @@ public class HandleIntl {
         MoreActivity.getInstance().clickLanguage();
         LanguageActivity.getInstance().selectLanguage(strLanguage);
         //return main
-        Common.getInstance().goBack(androidDriver, 1);
+        MoreActivity.getInstance().clickBack();
         if(!logout()){
             logger.info("logout failed!!!");
         }
@@ -326,7 +381,7 @@ public class HandleIntl {
         MoreActivity.getInstance().clickChangePass();
         ChangePassActivity.getInstance().showActivity();
         boolean bTrans =  ChangePassActivity.getInstance().translate(languageMap);
-        Common.getInstance().goBack(androidDriver, 2);
+        //Common.getInstance().goBack(androidDriver, 2);
         return bTrans;
     }
 
@@ -334,7 +389,7 @@ public class HandleIntl {
         //MainActivity.getInstance().clickMore();
         MoreActivity.getInstance().clickAbout();
         boolean bTrans =  AboutActivity.getInstance().staticUITranslate(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bTrans;
     }
 
@@ -344,7 +399,7 @@ public class HandleIntl {
         AboutActivity.getInstance().clickUserAgree();
         boolean bTrans =  UserAgreeActivity.getInstance().staticUITranslate(languageMap);
         //back to more
-        Common.getInstance().goBack(androidDriver, 2);
+        //Common.getInstance().goBack(androidDriver, 2);
         return bTrans;
     }
 
@@ -377,7 +432,7 @@ public class HandleIntl {
         //after check return to setting
         SettingActivity.getInstance().clickWorkLog();
         boolean bResult = WorkLogActivity.getInstance().translate(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bResult;
     }
 
@@ -385,7 +440,7 @@ public class HandleIntl {
         //after check return to setting
         SettingActivity.getInstance().clickContinuedClean();
         boolean bResult = ContinueCleanActivity.getInstance().translate(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bResult;
 
     }
@@ -394,21 +449,21 @@ public class HandleIntl {
         //after check return to setting
         SettingActivity.getInstance().clickLanguage();
         boolean bResult = VoiceReportActivity.getInstance().staticUITranslation(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bResult;
     }
 
     boolean translateFirmVer(){
         SettingActivity.getInstance().clickFirmware();
         boolean bResult = FirmVerActivity.getInstance().staticUITranslation(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bResult;
     }
 
     boolean translateResetMap(){
         SettingActivity.getInstance().clickReset();
         boolean bResult = ResetMapActivity.getInstance().translate(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bResult;
     }
 
@@ -417,7 +472,7 @@ public class HandleIntl {
         TimeScheduleActivity.getInstance().showActivity();
         TimeScheduleActivity.getInstance().clickAddSchedule();
         boolean bResult = NewScheduleActivity.getInstance().translate(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bResult;
     }
 
@@ -437,7 +492,7 @@ public class HandleIntl {
     boolean translateDelSchedule_swipe(){
         boolean bRes = TimeScheduleActivity.getInstance().translateDel_Swipe(languageMap);
         //return settings
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bRes;
     }
 
@@ -486,7 +541,7 @@ public class HandleIntl {
         SettingActivity.getInstance().clickTimeSchedule();
         TimeScheduleActivity.getInstance().showActivity();
         boolean bResult = TimeScheduleActivity.getInstance().translate(languageMap);
-        Common.getInstance().goBack(androidDriver, 1);
+        //Common.getInstance().goBack(androidDriver, 1);
         return bResult;
     }
 
@@ -518,9 +573,6 @@ public class HandleIntl {
         FullScreenActivity.getInstance().clickBack();
         return bRes;
     }
-
-
-
 
 
 }
