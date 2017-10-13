@@ -133,7 +133,7 @@ public class RegisterActivity {
         //click register
         btnRegister.click();
         //wait for end prompt;
-        Common.getInstance().waitForSecond(1500);
+        Common.getInstance().waitForSecond(500);
         try {
             if(textViewMessage.isDisplayed()){
                 logger.error("error message--" + textViewMessage.getText());
