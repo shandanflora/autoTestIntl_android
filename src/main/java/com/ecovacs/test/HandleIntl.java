@@ -97,6 +97,9 @@ public class HandleIntl {
       *            [3:e-mail]
       *            [4:password]
       *            [5:time(click send email)]
+      * @return 1: success
+      *         -1: Can not receive new email
+      *         -2: modify password failed
      */
     private int verifyEmail(String args[]){
 //        String strPath = RegisterActivity.class.getResource("/").getPath();
@@ -137,13 +140,13 @@ public class HandleIntl {
             RegisterActivity.getInstance().clickBack();
             return false;
         }
+        String strTime = getCurTime();
         if(!RetrievePassActivity.getInstance().ShowResisterConfirmActivity()){
             Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.ALREADY_REGISTER);
             RegisterActivity.getInstance().clickBack();
             logger.error("Not show Retrieve confirm email activity!!!");
             return false;
         }
-        String strTime = getCurTime();
         logger.info("Show active email activity!!!");
         Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.SENDED_EMAIL);
         //verify email
@@ -156,6 +159,8 @@ public class HandleIntl {
         args[4] = strPass;
         args[5] = strTime;
         if(1 != verifyEmail(args)){
+            RetrievePassActivity.getInstance().clickBack();
+            RetrievePassActivity.getInstance().clickBack();
             return false;
         }
         if (Common.getInstance().isAndroid()){
@@ -165,8 +170,10 @@ public class HandleIntl {
             //check--login with new password
             //return register activity
             RetrievePassActivity.getInstance().clickBack();
+            logger.info("return register activity!!!");
             //return welcome activity
             RegisterActivity.getInstance().clickBack();
+            logger.info("return welcome activity!!!");
             WelcomeActivity.getInstance().clickLogin();
         }
         if (!loginWithoutWelcome(strCountry, strEmail, PropertyData.getProperty("register_pass"))) {
@@ -232,6 +239,8 @@ public class HandleIntl {
         args[4] = strPass;
         args[5] = strTime;
         if(1 != verifyEmail(args)){
+            RetrievePassActivity.getInstance().clickBack();
+            RetrievePassActivity.getInstance().clickBack();
             return false;
         }
         //check--login with new password
