@@ -144,7 +144,8 @@ public class ImapMailBox {
             int iIndex = getEmailIndex(message);
             ReceiveMailUtil recMailUtil = new ReceiveMailUtil((MimeMessage)message[iIndex]);
             String strDate = recMailUtil.getSentDate();
-            if(-1 == compareTo(strDate, strSendTime)){
+            logger.info("Email time: " + strDate);
+            if(1 == compareTo(strDate, strSendTime)){
                 return "";
             }
             recMailUtil.getMailContent(message[iIndex]);
