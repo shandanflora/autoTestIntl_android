@@ -1,0 +1,21 @@
+{
+  "delUser":[{
+    "platformversion":"5.0.2",
+    "platformcode":"Android",
+    "cmdid":"0",
+    "appversion":"3.4.1",
+    "cmdname":"app_zz",
+    "action":"1005",
+    "userid":"",
+    "isdebug":"1",
+    "usertype":"1",
+    "uuid":"860955025336862",
+    "params":"{}"
+  }],
+  "getInfoByEmail":[{
+    "email":"ecovacstest123@sina.com",
+    "country":"ro",
+    "uri":"/apiUsers/getInfoByEmail",
+    "mode":"post"
+  }]
+}

@@ -1,6 +1,10 @@
 package com.ecovacs.test;
 
 import com.ecovacs.test.common.*;
+import com.google.gson.JsonObject;
+import org.apache.http.NameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +22,19 @@ public class Main {
     public static void main(String args[]) {
         //check repeat row in xlsx
         //TranslateIntl.getInstance().repeatRow();
+        //only for debug
+//        List<NameValuePair> paras = HttpRequestUtils.getInstance().getParaFromJson("handleUser.json", "getInfoByEmail");
+//        JSONObject obj = HttpRequestUtils.getInstance().HttpPost(PropertyData.getProperty("url"), paras);
+//        try {
+//            if(obj.getString("code").equals("0000")){
+//                logger.info("get user information by email successfully!!");
+//            }else {
+//                logger.info("get user information by email failed!!");
+//            }
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+        ////////
         //init
         Common.getInstance().setType(Common.REGISTER_RETURN_TYPE.NOT_REGISTER);
         //delete folder of report
