@@ -58,23 +58,23 @@ public class Main {
             }*/
             ExcelRow row = new ExcelRow();
             row.setOrdinal(iLoop);
-            row.setType("Register");
+            //row.setType("Register");
             row.setCountry(strCountry);
-            //String strCountry, String strServer, String strEmail, String strPass
-            if (!HandleIntl.getInstance().registerAndLogin(strCountry,
-                    mailInfors.get(iIndex).getImapServer(),
-                    mailInfors.get(iIndex).getEmail(),
-                    mailInfors.get(iIndex).getPassword())) {
-                row.setResult("Fail");
-                ExcelManage.getInstance().writeRow(iLoop, row, false, Common.getInstance().getType());
-                logger.error("***********Register country--" + strCountry + " failed!!!***********");
-                iLoop++;
-                iIndex++;
-                continue;
-            }
-            row.setResult("Pass");
-            ExcelManage.getInstance().writeRow(iLoop, row, true, Common.getInstance().getType());
-            logger.info("***********Register country -" + strCountry + " successfully!!!***********");
+//            //String strCountry, String strServer, String strEmail, String strPass
+//            if (!HandleIntl.getInstance().registerAndLogin(strCountry,
+//                    mailInfors.get(iIndex).getImapServer(),
+//                    mailInfors.get(iIndex).getEmail(),
+//                    mailInfors.get(iIndex).getPassword())) {
+//                row.setResult("Fail");
+//                ExcelManage.getInstance().writeRow(iLoop, row, false, Common.getInstance().getType());
+//                logger.error("***********Register country--" + strCountry + " failed!!!***********");
+//                iLoop++;
+//                iIndex++;
+//                continue;
+//            }
+//            row.setResult("Pass");
+//            ExcelManage.getInstance().writeRow(iLoop, row, true, Common.getInstance().getType());
+//            logger.info("***********Register country -" + strCountry + " successfully!!!***********");
             logger.info("***********Ready to Forget password country-" + strCountry + "***********");
             row.setType("ForgetPassword");
             if (!HandleIntl.getInstance().forgetPassword(strCountry,

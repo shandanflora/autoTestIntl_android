@@ -1,0 +1,42 @@
+{
+  "androidCountries":[
+  	"Taiwan",
+    "South Korea",
+    "Thailand",
+    "Hongkong",
+    "Malaysia",
+    "United Arab Emirates",
+    "Israel",
+    "Singapore",
+    "Iran",
+    "Japan",
+    "Australia",
+    "New Zealand",
+    "Philippines",
+    "Germany"
+  ],
+  "iosCountries":[
+    "Taiwan",
+    "South Korea",
+    "Thailand",
+    "Hong Kong",
+    "Malaysia",
+    "United Arab Emirates",
+    "Israel",
+    "Singapore",
+    "Iran",
+    "Japan",
+    "Australia",
+    "New Zealand",
+    "Philippines",
+    "Germany"
+  ],
+  "sheets":[
+    "Romania",
+    "United States of America",
+    "Canada",
+    "Brazil"
+  ]
+}
+
+
